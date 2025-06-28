@@ -1,21 +1,30 @@
 import React, { useState } from 'react';
 import VillagerList from './components/VillagerList';
 import VillagerDetail from './components/VillagerDetail';
+import './css/App.css';
 
 export default function App() {
   const [selectedName, setSelectedName] = useState(null);
 
   return (
-    <div>
-      <h1>동물의 숲 주민 도감</h1>
+    <div className="App">
+      <div className="title">
+        <h1>동물의 숲 주민 도감</h1>
+      </div>
 
-      {/* 주민 리스트 - SWR 사용 */}
-      <VillagerList onSelect={setSelectedName} selectedName={selectedName} />
-      
-      {/* 선택한 주민 상세정보 - TanStackQuery 사용 */}
-      
-      {selectedName && <VillagerDetail name = {selectedName} />}
-      {!selectedName && <p>주민을 선택해 주세요</p>}
+      <div className="container">
+        <div className="villager-list-wrapper">
+          <VillagerList onSelect={setSelectedName} />
+        </div>
+
+        <div className="villager-detail">
+          {selectedName ? (
+            <VillagerDetail name={selectedName} />
+          ) : (
+            <p>주민을 선택해 주세요</p>
+          )}
+        </div>
+      </div>
     </div>
   );
 }
