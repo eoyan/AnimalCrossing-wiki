@@ -5,7 +5,7 @@ const fetchVillagerDetail = async (name) => {
         method: 'GET',
         headers: {
           'X-API-KEY': import.meta.env.VITE_NOOKIPEDIA_API_KEY,
-          'Accept-Version': '1.0.0',
+          'Accept-Version': '1.0.0', // 커스텀 헤더 
         },
       }
     );
