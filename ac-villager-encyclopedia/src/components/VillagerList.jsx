@@ -3,7 +3,7 @@ import useSWR from 'swr';
 import axios from 'axios';
 import '../css/VillagerList.css';
 
-export default function VillagerList({ onSelect}) {
+export default function VillagerList({ onSelect }) {
 
     const fetcher = async (url) => 
         await axios.get(url, {

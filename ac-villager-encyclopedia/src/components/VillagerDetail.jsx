@@ -1,14 +1,27 @@
 import React from 'react';
-import useVillagerDetail from '../hooks/useVillagerDetail';
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
 
-export default function VillagerDetail({name}) {
-    const { data, isLoading, error } = useVillagerDetail(name);
-    console.log('상세 데이터:', data);
+export default function useVillagerDetail({ name }) {
+    const {data, isLoading, error} = useQuery({
+        queryKey: ['villager', name],
+        queryFn: async () => await
+            axios.get(`https://api.nookipedia.com/villagers?name=${encodeURIComponent(name)}`,
+            {
+                method: 'GET',
+                headers: {
+                'X-API-KEY': import.meta.env.VITE_NOOKIPEDIA_API_KEY,
+                'Accept-Version': '1.0.0', 
+                },
+            })
+            .then(
+                (res) => res.data[0]),
+        enabled: !!name, 
+    });
 
-    if (isLoading) return <p>주민 정보 로딩 중...</p>
-    if (error) return <p>주민 정보를 불러오는 데 실패했습니다.</p>;
+    if (isLoading) return <p>로딩중</p>
+    if (error) return <p>주민 상세 정보를 불러오는데 실패하였습니다.</p>;
 
-    // 주민의 상세 정보를 표시하는 컴포넌트 
     return (
         <div>
             <h2> {data.name} 상세 정보</h2>
