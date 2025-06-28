@@ -1,6 +1,7 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
+import '../css/VillagerDetail.css';
 
 export default function useVillagerDetail({ name }) {
     const {data, isLoading, error} = useQuery({
@@ -23,7 +24,7 @@ export default function useVillagerDetail({ name }) {
     if (error) return <p>주민 상세 정보를 불러오는데 실패하였습니다.</p>;
 
     return (
-        <div>
+        <div className="villager-detail">
             <h2> {data.name} 상세 정보</h2>
             <img src = {data.image_url} alt = {data.name} width = "100" />
             <ul>
