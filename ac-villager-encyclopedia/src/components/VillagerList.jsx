@@ -22,7 +22,6 @@ export default function VillagerList({ onSelect }) {
     return (
         <ul className = "villager-list">
             {data
-                ?.filter((v) => v.species == 'Duck')
                 .map ((v) => (
                     
                     <li 
