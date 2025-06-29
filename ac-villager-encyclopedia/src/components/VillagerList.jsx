@@ -22,22 +22,22 @@ export default function VillagerList({ onSelect }) {
     return (
         <ul className = "villager-list">
             {data
-                ?.filter((v) => ['Raymond', 'Lolly', 'Sasha', 'Punchy', 'Judy', 'Felicity' ].includes(v.name))
+                ?.filter((v) => v.species == 'Duck')
                 .map ((v) => (
                     
-            <li 
-                className = "villager-card"
-                key={v.id}
-                onClick={() => onSelect(v.name)}
-            >
-                <img 
-                    src={v.image_url} 
-                    alt={v.name}/>
-                <span>
-                    {v.name}
-                </span>
-            </li>
-        ))}
+                    <li 
+                        className = "villager-card"
+                        key={v.id}
+                        onClick={() => onSelect(v.name)}
+                    >
+                        <img 
+                            src={v.image_url} 
+                            alt={v.name}/>
+                        <span>
+                            {v.name}
+                        </span>
+                    </li>
+                ))}
         </ul>
         
     );

@@ -1,5 +1,6 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
+import { useVillagerStore } from '../store/useVillagerStore';
 import axios from 'axios';
 import '../css/VillagerDetail.css';
 
@@ -20,6 +21,12 @@ export default function useVillagerDetail({ name }) {
         enabled: !!name, 
     });
 
+    const addFavorite = useVillagerStore(state => state.addFavorite);
+    const handleAddFavorite = (villager) => {
+        addFavorite(villager);
+        console.log('관심주민 등록 ', villager.name, villager.img);
+    };
+
     if (isLoading) return <p>로딩중</p>
     if (error) return <p>주민 상세 정보를 불러오는데 실패하였습니다.</p>;
 
@@ -33,6 +40,10 @@ export default function useVillagerDetail({ name }) {
                 <li>좋아하는 말 : {data.quote || '정보 없음'}</li>
                 <li>성격: {data.personality}</li>
             </ul>
-        </div>
+
+            <button onClick={() => handleAddFavorite({name: data.name, img: data.image_url})}>
+                관심 주민 등록
+            </button>
+        </div> 
     )
 }
